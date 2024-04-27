@@ -87,7 +87,7 @@ weather_image.text((15, 31), date.today().strftime('%A %B, %d'),font=myFont, fil
 
 
 # main weather display, current conditions
-main_weatehr_icon = Image.open('icons/'+current_weather_code+'.png')
+main_weatehr_icon = Image.open('/home/umair/Documents/info_dashboard/icons/'+current_weather_code+'.png')
 weather_data_png.paste(main_weatehr_icon,(30,50),mask=main_weatehr_icon)
 
 weather_image.text((65, 180)
@@ -103,7 +103,7 @@ weather_image.text((50, 240)
                    ,font=ImageFont.truetype('LiberationSans-Bold.ttf', 15)
                   , fill=(0, 106, 188))
 
-main_weatehr_icon = Image.open('icons/'+'sunrise'+'.png')
+main_weatehr_icon = Image.open('/home/umair/Documents/info_dashboard/icons/'+'sunrise'+'.png')
 main_weatehr_icon = main_weatehr_icon.resize((70,70))
 weather_data_png.paste(main_weatehr_icon,(15,270),mask=main_weatehr_icon)
 
@@ -113,16 +113,16 @@ weather_image.text((100, 300)
                    , fill=(0, 106, 188))
 
 
-main_weatehr_icon = Image.open('icons/'+'sunset'+'.png')
+main_weatehr_icon = Image.open('/home/umair/Documents/info_dashboard/icons/'+'sunset'+'.png')
 main_weatehr_icon = main_weatehr_icon.resize((70,70))
 weather_data_png.paste(main_weatehr_icon,(15,340),mask=main_weatehr_icon)
 
 weather_image.text((100, 370)
                    ,current_sunset
                    ,font=ImageFont.truetype('LiberationSans-Bold.ttf', 15)
-                   , fill=(0, 106, 188))
+                   , fill=(0, 106, 188))                  
 
-main_weatehr_icon = Image.open('icons/'+'wind'+'.png')
+main_weatehr_icon = Image.open('/home/umair/Documents/info_dashboard/icons/'+'wind_1'+'.png')
 main_weatehr_icon = main_weatehr_icon.resize((55,55))
 weather_data_png.paste(main_weatehr_icon,(18,415),mask=main_weatehr_icon)
 
@@ -148,12 +148,12 @@ for i in range(1,7):
                    ,font=ImageFont.truetype('LiberationSans-Bold.ttf', 15)
                    , fill=(0, 106, 188))    
     
-    daily_weatehr_icon = Image.open('icons/'+str(api_response['daily']['weather_code'][i])+'.png')
+    daily_weatehr_icon = Image.open('/home/umair/Documents/info_dashboard/icons/'+str(api_response['daily']['weather_code'][i])+'.png')
     daily_weatehr_icon = daily_weatehr_icon.resize((90,90))
     weather_data_png.paste(daily_weatehr_icon,(x,70),mask=daily_weatehr_icon)    
 
     weather_image.text((x+25, 180)
-                   ,str(api_response['daily']['apparent_temperature_min'][i]) + '° | ' + str(api_response['daily']['temperature_2m_min'][i])+'°'
+                   ,str(api_response['daily']['apparent_temperature_max'][i]) + '° | ' + str(api_response['daily']['temperature_2m_min'][i])+'°'
                    ,font=ImageFont.truetype('LiberationSans-Bold.ttf', 15)
                    , fill=(0, 106, 188))  
     
@@ -172,7 +172,6 @@ for i in range(1,7):
 j=0
 for i in api_response['hourly']['time']:
     if i >= api_response['current']['time']:
-        print(i)
         break            
     j=j+1
    
@@ -216,7 +215,7 @@ for i in range(0,6):
     else:
         weather_code=str(api_response['hourly']['weather_code'][j+i])
 
-    daily_weatehr_icon = Image.open('icons/'+weather_code+'.png')
+    daily_weatehr_icon = Image.open('/home/umair/Documents/info_dashboard/icons/'+weather_code+'.png')
     daily_weatehr_icon = daily_weatehr_icon.resize((60,60))
     weather_data_png.paste(daily_weatehr_icon,(x+30,320),mask=daily_weatehr_icon)  
 
@@ -235,5 +234,7 @@ for i in range(0,6):
 
     x=x+90
 
-weather_data_png.show()
-weather_data_png.save("weather_set.png")    
+
+weather_data_png.save("/home/umair/Documents/info_dashboard/weather.png")    
+
+

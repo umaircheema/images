@@ -2,9 +2,10 @@ import sys
 import time
 from PIL import Image
 from inky.auto import auto
+import os
 
 while(1):
-	import weather
+	os.system("python3 /home/umair/Documents/info_dashboard/weather.py")
 	inky = auto(ask_user=True, verbose=True)
 	saturation = 0.5
 

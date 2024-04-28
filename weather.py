@@ -77,7 +77,7 @@ if current_weather_code == '0' and current_is_day == 0:
 if (current_weather_code == '1' or current_weather_code == '')  and current_is_day == 0:
     current_weather_code = '22'
 
-weather_data_png = Image.new(mode="RGB", size=(800, 480), color=("White" ))
+weather_data_png = Image.new(mode="RGBA", size=(800, 480), color=("White" ))
 myFont = ImageFont.truetype('LiberationSans-Bold.ttf', 15)
 weather_image = ImageDraw.Draw(weather_data_png)
 
@@ -150,8 +150,9 @@ for i in range(1,7):
     
     daily_weatehr_icon = Image.open('/home/umair/Documents/info_dashboard/icons/'+str(api_response['daily']['weather_code'][i])+'.png')
     daily_weatehr_icon = daily_weatehr_icon.resize((90,90))
-    weather_data_png.paste(daily_weatehr_icon,(x,70),mask=daily_weatehr_icon)    
 
+    weather_data_png.paste(daily_weatehr_icon,(x,70),mask=daily_weatehr_icon)    
+    
     weather_image.text((x+25, 180)
                    ,str(api_response['daily']['apparent_temperature_max'][i]) + '° | ' + str(api_response['daily']['temperature_2m_min'][i])+'°'
                    ,font=ImageFont.truetype('LiberationSans-Bold.ttf', 15)
@@ -235,6 +236,10 @@ for i in range(0,6):
     x=x+90
 
 
+weather_image.text((609, 460)
+                ,'last refreshed '+str(datetime.datetime.now())[0:19] 
+                ,font=ImageFont.truetype('LiberationSans-Bold.ttf', 10)
+                , fill=(0, 106, 188))
 weather_data_png.save("/home/umair/Documents/info_dashboard/weather.png")    
 
 
